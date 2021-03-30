@@ -12,7 +12,7 @@ export default new Vuex.Store({
   },
   mutations: {
     SET_USER(state, user) {
-      state.currentUser = user;
+      state.currentUser = user;      
     },
   },
   actions: {
