@@ -2,11 +2,11 @@
   <div>
     <div class="container-fluid">        
       <div class="row">
-        <div class="col-5 col-md-3 sidebar">
+        <div class="col-12 col-md-4 sidebar">
          <side-bar> </side-bar>
         </div>
-        <div class="col-7 col-md-9 content">
-          content goes here
+        <div class="col-12 col-md-8 content">
+          <messages></messages>
         </div>
       </div>
     </div>
@@ -15,18 +15,18 @@
 
 <script>
 import SideBar from '@/components/SideBar.vue'
+import Messages from '../components/messages/Messages'
 export default {
   name: "chat",
-  components: { SideBar}
+  components: { SideBar, Messages }
   
 };
 </script>
 
 <style scoped>
-.sidebar {
-  width: 33.5vw;
+.sidebar {  
   height: 100vh;
-  background-color: #000;
+  background-color: rgba(0, 0, 0, 0.877);
 }
 hr {
   border: 1px solid whitesmoke;
