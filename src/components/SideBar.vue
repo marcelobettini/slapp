@@ -5,28 +5,26 @@
     <span class="text-white display-5 mx-4">{{
       this.currentUser.displayName
     }}</span>
-    <img
-      class="rounded-circle"
-      :src="currentUser.photoURL"
-      alt=""
-    />
+    <img class="rounded-circle" :src="currentUser.photoURL" alt="" />
     <hr />
 
-    <div id="logout">
-      <button class="btn btn-outline-light" @click="logout">
-        Logout
-      </button>
-    </div>
+    <button class="btn btn-outline-light my-4" @click="logout">
+      Logout
+    </button>
+
+    <channels></channels>
   </div>
 </template>
 
 <script>
+import Channels from "@/components/Channels.vue";
 import firebase from "firebase/app";
-import {mapGetters} from 'vuex'
+import { mapGetters } from "vuex";
 export default {
   name: "sidebar",
+  components: { Channels },
   computed: {
-      ...mapGetters(['currentUser'])
+    ...mapGetters(["currentUser"]),
   },
   methods: {
     logout() {
@@ -38,19 +36,11 @@ export default {
 };
 </script>
 
-<style scoped>
-.sidebar {
-  width: 33.5vw;
-  height: 100vh;
-  background-color: #000;
-}
+<style >
 hr {
   border: 1px solid rgba(245, 245, 245, 0.651);
 }
 img {
   max-width: 32px;
-}
-#logout {
-  margin-top: 2em;
 }
 </style>
