@@ -1,6 +1,5 @@
-<template>
-    <div>
-        <div class="mt-3">
+<template>    
+        <div class="list-group mt-1 mb-3 messages-list p-3">
             <div v-for="message in messages" :key="message.id">
                 <div class="media">
                     <img :src="message.user.avatar" class="rounded-circle align-self-start mr-3">
@@ -12,9 +11,7 @@
                     </div>
                 </div>
             </div>
-        </div>
-
-    </div>
+        </div>    
 </template>
 
 <script>
@@ -28,7 +25,9 @@
         }
     }
 </script>
-
-<style scoped>
-
+<style>
+.messages-list {        
+    height: 91vh;
+    border-radius: 0.5%;
+}
 </style>

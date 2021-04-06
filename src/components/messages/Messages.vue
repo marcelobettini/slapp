@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="messages-list">
     <single-message :messages="messages"></single-message>
     <message-form></message-form>
   </div>
@@ -27,7 +27,7 @@ export default {
   },
   watch: {
     currentChannel: function() {
-      this.messsages = [];
+      this.messages = [];
       this.addListeners();
       this.channel = this.currentChannel;
     },
@@ -43,7 +43,7 @@ export default {
     },
     detachListeners() {
       if (this.channel !== null) {
-        this.messagesRef.child(this.channel.id).off();        
+        this.messagesRef.child(this.channel.id).off();
       }
     },
   },
@@ -53,4 +53,5 @@ export default {
 };
 </script>
 
-<style lang="scss" scoped></style>
+<style scoped>
+</style>

@@ -1,5 +1,4 @@
-<template>
-  <div class="container">
+<template>  
     <div class="messageform">
       <form>
         <div class="input-group mb-3">
@@ -23,8 +22,7 @@
           </div>
         </div>
       </form>
-    </div>
-  </div>
+    </div>  
 </template>
 
 <script>
@@ -81,11 +79,11 @@ export default {
   color: white;
 }
 input,
-button {
-  margin-top: 90vh;
+button {  
   height: 50px;
 }
-.container {
-  height: 100vh;
-}
+
+button {
+  width: 4.5em;
+}  
 </style>
