@@ -28,8 +28,7 @@ export default {
   watch: {
     currentChannel: function() {
       this.channel = this.currentChannel;      
-      this.addListeners();
-      
+      this.addListeners();      
     },
   },
   methods: {
