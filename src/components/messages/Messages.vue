@@ -27,9 +27,9 @@ export default {
   },
   watch: {
     currentChannel: function() {
-      this.messages = [];
+      this.channel = this.currentChannel;      
       this.addListeners();
-      this.channel = this.currentChannel;
+      
     },
   },
   methods: {
@@ -37,7 +37,7 @@ export default {
       //listen to child added events on current channel
       this.messagesRef
         .child(this.currentChannel.id)
-        .on("child_added", (snapshot) => {
+        .on("child_added", (snapshot) => {          
           this.messages.push(snapshot.val());
         });
     },
