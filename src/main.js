@@ -26,13 +26,7 @@ const unsubscribe = firebase.auth().onAuthStateChanged((user) => {
     router,
     store,
     render: (h) => h(App),
-  }).$mount("#app");
-  new Vue({
-    router,
-    store,
-    render: (h) => h(App),
-  }).$mount("#app");
+  }).$mount("#app");  
   unsubscribe(); // recursion, it calls itself onAuthStateChanged...
 });
-
 Vue.config.productionTip = false;

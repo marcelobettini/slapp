@@ -26,10 +26,9 @@ export default {
     ...mapGetters(["currentChannel"]),
   },
   watch: {
-    currentChannel: function() {
-      this.messages = [];
+    currentChannel: function() {            
       this.channel = this.currentChannel;      
-      this.addListeners();        
+      this.addListeners();
     },
   },
   methods: {

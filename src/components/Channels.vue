@@ -89,9 +89,11 @@ import "firebase/database";
 export default {
   name: "channels",
   mounted() {
+    console.log('mounted')
     this.addListeners();
   },
   unmounted() {
+    console.log('unmounted')
     this.detachListeners();
   },
   data() {

@@ -16,7 +16,7 @@ export default new Vuex.Store({
     SET_USER(state, user) {
       state.currentUser = user;      
     },
-    SET_CURRENT_CHANNEL(state, channel) {
+    SET_CURRENT_CHANNEL(state, channel) {      
       state.currentChannel = channel;
     },
   },
@@ -24,7 +24,7 @@ export default new Vuex.Store({
     setUser({ commit }, user) {
       commit("SET_USER", user);
     },
-    setCurrentChannel({commit}, channel) {
+    setCurrentChannel({commit}, channel) {      
       commit("SET_CURRENT_CHANNEL", channel);
     },
   },
