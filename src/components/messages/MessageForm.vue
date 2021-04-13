@@ -1,6 +1,6 @@
 <template>  
     <div class="messageform">
-      <form>
+      <form @submit.prevent='sendMessage'>
         <div class="input-group mb-3">
           <input
             v-model.trim="message"
@@ -26,9 +26,10 @@
 </template>
 
 <script>
+import $ from 'jquery'
+import { mapGetters } from "vuex";
 import firebase from "firebase/app";
 import "firebase/database";
-import { mapGetters } from "vuex";
 export default {
   name: "message-form",
   data() {
@@ -59,9 +60,14 @@ export default {
             .child(this.currentChannel.id)
             .push()
             .set(newMessage) //$parent  refers to messages component
-            .then(()=> {})
+            .then(()=> {
+              this.$nextTick(() => {
+                $('html, body').scrollTop($(document).height());
+              })
+            })
             .catch((error) => {
               this.errors.push(error);              
+              console.log(error)
             });
           //reset message and errors
           this.message = "";

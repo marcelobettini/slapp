@@ -88,8 +88,7 @@ import firebase from "firebase/app";
 import "firebase/database";
 export default {
   name: "channels",
-  mounted() {
-    console.log('mounted')
+  mounted() {    
     this.addListeners();
   },
   unmounted() {
@@ -131,8 +130,7 @@ export default {
     },
     addListeners() {
       this.channelsRef.on("child_added", (snapshot) => {        
-        this.channels.push(snapshot.val());
-        console.log(snapshot.val())
+        this.channels.push(snapshot.val());        
         //set current channel
         if (this.channels.length > 0) {
           //set first one as current channel

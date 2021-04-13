@@ -22,12 +22,8 @@ import moment from "moment";
 import { mapGetters } from "vuex";
 export default {
   name: "single-message",
-  props: {
-    messages: {
-      type: Array,
-      required: true,
-    },
-  },
+  props: ['messages'],
+  
   computed: {
     ...mapGetters(["currentUser"]),
   },

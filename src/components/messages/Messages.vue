@@ -1,44 +1,49 @@
 <template>
   <div class="messages-list">
-    <single-message :messages="messages"></single-message>
+    <!-- passing props to child component -->
+    <single-message :messages="messages"></single-message> 
     <message-form></message-form>
   </div>
 </template>
 
 <script>
+import $ from 'jquery'
 import SingleMessage from "../messages/SingleMessage";
+import MessageForm from "./MessageForm.vue";
 import firebase from "firebase/app";
 import "firebase/database";
-import MessageForm from "./MessageForm.vue";
 import { mapGetters } from "vuex";
 
 export default {
-  name: "message",
+  name: "messages",
   components: { SingleMessage, MessageForm },
   data() {
     return {
-      messagesRef: firebase.database().ref("messages"),
+      messagesRef: firebase.database().ref("messages"), //this reference is used to push but also to retrieve messages from Firebase
       messages: [],
-      channel: null,
+      channel: '',
     };
   },
   computed: {
     ...mapGetters(["currentChannel"]),
   },
   watch: {
-    currentChannel: function() {            
-      this.channel = this.currentChannel;      
+    currentChannel: function() {   
+      this.messages = [];
       this.addListeners();
+      this.channel = this.currentChannel;      
     },
   },
   methods: {
     addListeners() {
-      //listen to child added events on current channel
-      this.messages = [];
-      this.messagesRef
-        .child(this.currentChannel.id)
-        .on("child_added", (snapshot) => {          
+      //listen to child added events on current channel      
+      this.messagesRef.child(this.currentChannel.id).on("child_added", (snapshot) => {          
           this.messages.push(snapshot.val());
+
+          //scroll to top 
+          this.$nextTick(() => {
+                $('html, body').scrollTop($(document).height());
+              })
         });
     },
     detachListeners() {
