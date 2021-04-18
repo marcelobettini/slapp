@@ -3,24 +3,28 @@
     <div class="nav align-content-center align-items-start text-light">
       <h4>Users</h4>
     </div>
-    <ul class="nav flex-column align-items-start">
-      <li
-        v-for="user in users"
-        :key="user.uid"
-        @click.prevent="changeChannel(user)"
-      >
-        <span>
-          <img :src="user.avatar" height="20" class="img rounded-circle" />
+    <!-- <ul class="nav flex-column align-items-start"> -->
+      <div class="list-group mt-5">
+        <!-- :class declaration sets active Bootstrap class if condition true -->
+        <button
+          v-for="user in users"
+          :key="user.id"
+          class="list-group-item list-group-item-action"
+          type="button"
+          :class="{'active': isActive(user) }"
+          @click.prevent="changeChannel(user)"
+        >
           <span
-            :class="{
-              'text-success': isOnline(user),
-              'text-danger': !isOnline(user),
-            }"
-            ><a href="#"> {{ user.name }} </a></span
-          >
-        </span>
-      </li>
-    </ul>
+            :class="{'fa fa-circle online': isOnline(user), 'fa fa-circle offline': !isOnline(user)}"
+          ></span>
+          <span>
+            <img :src="user.avatar" height="20" class="img rounded-circle" />
+            <span
+              :class="{'text-success': isActive(user)}"><a href="#"> {{ user.name }} </a></span
+            >
+          </span>
+        </button>
+      </div>    
   </div>
 </template>
 
@@ -39,16 +43,21 @@ export default {
     };
   },
   computed: {
-    ...mapGetters(["currentUser"]),
+    ...mapGetters(["currentUser", "currentChannel"]),
   },
   methods: {
     changeChannel(user) {
       //to change channel, you need channel id
       //to get channel id, use getChannelId() method
-      let channelId = this.getChannelId(user.uid)
+      let channelId = this.getChannelId(user.uid);
       //create channel object with id & name
-      let channel = {id: channelId, name: user.name}
-      this.$store.dispatch('setCurrentChannel', channel)
+      let channel = { id: channelId, name: user.name };
+      this.$store.dispatch("setPrivate", true);
+      this.$store.dispatch("setCurrentChannel", channel);
+    },
+    isActive(user) {
+      let channelId = this.getChannelId(user.uid);
+      return this.currentChannel.id === channelId;
     },
     getChannelId(userId) {
       // use this format to create channel smallerUserId/biggerUserId
@@ -122,7 +131,10 @@ export default {
 </script>
 
 <style scoped>
-li {
-  list-style: none;
+.online {
+  color: green;
+}
+.offline {  
+  color: red;
 }
 </style>

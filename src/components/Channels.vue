@@ -45,7 +45,14 @@
           <div class="modal-body">
             <form>
               <div class="form-group">
-                <input type="text" class="form-control" v-model="new_channel" id="new_Channel" name="new_Channel" placeholder="Input channel name"/>
+                <input
+                  type="text"
+                  class="form-control"
+                  v-model="new_channel"
+                  id="new_Channel"
+                  name="new_Channel"
+                  placeholder="Input channel name"
+                />
               </div>
               <!-- errors -->
               <ul class="list-group" v-if="hasErrors">
@@ -88,11 +95,11 @@ import firebase from "firebase/app";
 import "firebase/database";
 export default {
   name: "channels",
-  mounted() {    
+  mounted() {
     this.addListeners();
   },
   unmounted() {
-    console.log('unmounted')
+    console.log("unmounted");
     this.detachListeners();
   },
   data() {
@@ -129,8 +136,8 @@ export default {
         });
     },
     addListeners() {
-      this.channelsRef.on("child_added", (snapshot) => {        
-        this.channels.push(snapshot.val());        
+      this.channelsRef.on("child_added", (snapshot) => {
+        this.channels.push(snapshot.val());
         //set current channel
         if (this.channels.length > 0) {
           //set first one as current channel
@@ -148,11 +155,12 @@ export default {
       this.channelsRef.off();
     },
     changeChannel(channel) {
+      this.$store.dispatch("setPrivate", false);
       this.$store.dispatch("setCurrentChannel", channel);
     },
-      setActiveChannel(channel) {
-        return channel.id === this.currentChannel.id;
-      },
+    setActiveChannel(channel) {
+      return channel.id === this.currentChannel.id;
+    },
   },
 };
 </script>
